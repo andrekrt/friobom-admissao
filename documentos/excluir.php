@@ -18,7 +18,7 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $_
 
 }else{
     echo "<script> alert('Acesso não permitido!')</script>";
-        echo "<script> window.location.href='usuarios.php' </script>";
+        echo "<script> window.location.href='documentos.php' </script>";
 }
 
 ?>

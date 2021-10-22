@@ -102,60 +102,38 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group espaco col-md-4">
-                                <label for="rg">Anexo RG</label>
-                                <input type="file" name="rg" class="form-control" id="rg" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
-                            </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="cpf">Anexo CPF(Desconsiderar caso tenha no RG)</label>
-                                <input type="file" name="cpf" class="form-control" id="cpf" aria-describedby="inputGroupFileAddon03"  aria-label="Upload">
-                            </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="titulo">Título de Eleitor</label>
-                                <input type="file" name="titulo" class="form-control" id="titulo" aria-describedby="inputGroupFileAddon03" required  aria-label="Upload">
+                            <div class="form-group espaco col-md-6">
+                                <label for="documentos">Anexar Documentação (Abaixo Documentação a ser Enviada) </label>
+                                <input type="file" name="documentos[]" multiple class="form-control" id="documentos" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group espaco col-md-4">
-                                <label for="cnh">CNH</label>
-                                <input type="file" name="cnh" class="form-control" id="cnh" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+                            <div class="form-group col-md-4 espaco">
+                                <ul class="list-group">
+                                    <li class="list-group-item">RG</li>
+                                    <li class="list-group-item">CPF(Desconsidere caso tenha no RG)</li>
+                                    <li class="list-group-item">Título Eleitor</li>
+                                    <li class="list-group-item">CNH</li>
+                                    <li class="list-group-item">Reservista(Homem)</li>
+                                </ul>
                             </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="reservista">Reservista</label>
-                                <input type="file" name="reservista" class="form-control" id="reservista" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+                            <div class="form-group col-md-4 espaco">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Comprovante de Endereço</li>
+                                    <li class="list-group-item">Certidão Nascimento(Casamento)</li>
+                                    <li class="list-group-item">Comprovante Escolaridade</li>
+                                    <li class="list-group-item">Carteira de Vacinação</li>
+                                    <li class="list-group-item">Certidão Filhos até 14 anos</li>
+                                </ul>
                             </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="residencia">Comprovante de Residência</label>
-                                <input type="file" name="residencia" class="form-control" id="residencia" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
+                            <div class="form-group col-md-4 espaco">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Carteira de Vacinação Filhos até 14 anos</li>
+                                    <li class="list-group-item">Foto 3x4</li>
+                                    <li class="list-group-item">Atestado de Antencedentes Criminais</li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group espaco col-md-4">
-                                <label for="certidao">Certidão de Nascimento (Casamento)</label>
-                                <input type="file" name="certidao" class="form-control" id="certidao" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
-                            </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="escolaridade">Comprovante de Escolaridade</label>
-                                <input type="file" name="escolaridade[]" multiple class="form-control" id="escolaridade" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
-                            </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="carteiraVac">Carteira de Vacinação </label>
-                                <input type="file" name="carteiraVac" class="form-control" id="carteiraVac" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group espaco col-md-4">
-                                <label for="certidaoFilhos">Certidão dos Filhos(Até 14 anos)</label>
-                                <input type="file" name="certidaoFilhos[]" class="form-control" id="certidaoFilhos" multiple aria-describedby="inputGroupFileAddon03" aria-label="Upload">
-                            </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="vacFilhos">Carteira de Vacinação dos Filhos(Até 14 anos) </label>
-                                <input type="file" name="vacFilhos[]" multiple class="form-control" id="vacFilhos" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
-                            </div>
-                            <div class="form-group espaco col-md-4">
-                                <label for="foto">Foto 3x4 </label>
-                                <input type="file" name="foto" class="form-control" id="foto" aria-describedby="inputGroupFileAddon03" required aria-label="Upload">
-                            </div>
+                            
                         </div>
                         <button type="submit" class="btn btn-primary"> Enviar </button>
                     </form>
