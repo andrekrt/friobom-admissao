@@ -19,12 +19,11 @@ $searchArray = array();
 ## Search 
 $searchQuery = " ";
 if($searchValue != ''){
-	$searchQuery = " AND (razao_social LIKE :razao_social OR endereco LIKE :endereco OR bairro LIKE :bairro OR situacao LIKE :situacao OR cidade LIKE :cidade OR cep LIKE :cep OR cnpj LIKE :cnpj OR nome_fantasia LIKE :nome_fantasia ) ";
+	$searchQuery = " AND (razao_social LIKE :razao_social OR endereco LIKE :endereco OR bairro LIKE :bairro OR cidade LIKE :cidade OR cep LIKE :cep OR cnpj LIKE :cnpj OR nome_fantasia LIKE :nome_fantasia ) ";
     $searchArray = array( 
         'razao_social'=>"%$searchValue%", 
         'endereco'=>"%$searchValue%",
         'bairro'=>"%$searchValue%",
-        'situacao'=>"%$searchValue%",
         'cidade'=>"%$searchValue%",
         'cep'=>"%$searchValue%",
         'cnpj'=>"%$searchValue%",

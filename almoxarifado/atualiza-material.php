@@ -2,6 +2,7 @@
 
 session_start();
 require("../conexao.php");
+require("funcoes.php");
 
 if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $_SESSION['tipoUsuario'] == 1 ){
 
@@ -19,8 +20,11 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $_
     $atualiza->bindValue(':idMaterial', $idMaterial);
 
     if($atualiza->execute()){
-        echo "<script> alert('Atualizado com Sucesso!')</script>";
-        echo "<script> window.location.href='estoque.php' </script>";
+        if(atualizaEstoque($idMaterial)){
+            echo "<script> alert('Atualizado com Sucesso!')</script>";
+            echo "<script> window.location.href='estoque.php' </script>";
+        }
+       
     }else{
         print_r($atualiza->errorInfo());
     }

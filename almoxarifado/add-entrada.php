@@ -27,7 +27,7 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
 
     if($inserir->execute()){
         if(atualizaEstoque($material)){
-            echo "<script>alert('Material Cadastrado com Sucesso!');</script>";
+            echo "<script>alert('Entrada Lançada!');</script>";
             echo "<script>window.location.href='entradas.php'</script>";
         }
         
