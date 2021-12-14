@@ -306,6 +306,26 @@ a .nome{
 }
 /*fim submenu*/
 
+/*icone excel*/
+.icon-exp{
+    display: flex;
+    justify-content: end;
+}
+.icon-exp img{
+    height: 50px;
+    margin: 5px;
+}
+
+/* css botoes de opções*/
+.area-opcoes-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding:5px;
+}
+.area-opcoes-button button, .area-opcoes-button a {
+    margin: 5px;
+}
 
 /*mobile*/
 @media(max-width:768px){

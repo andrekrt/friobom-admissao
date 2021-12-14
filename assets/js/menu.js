@@ -18,6 +18,16 @@ function menuUsuario(){
     
 }
 
+function menuAlmoxarifado(){
+
+    if(document.getElementById("submenuAlmoxarifado").style.display == "none" || document.getElementById("submenuAlmoxarifado").style.display == "" ){
+        document.getElementById("submenuAlmoxarifado").style.display = "block";
+    }else{
+        document.getElementById("submenuAlmoxarifado").style.display = "none";
+    }
+    
+}
+
 function abrirMenuMobile(){
     if(document.getElementById('menu-lateral').style.display=='none' || document.getElementById('menu-lateral').style.display==''){
         document.getElementById('menu-lateral').style.display='block';

@@ -23,6 +23,19 @@
         </div>
         <?php if($tipoUsuario==1): ?>
         <div class="item">
+            <a onclick="menuAlmoxarifado()">
+                <img src="../assets/images/menu/material.png" alt="">
+            </a>
+            <nav id="submenuAlmoxarifado">
+                <ul class="nav flex-column">
+                    <li class="nav-item"> <a class="nav-link" href="../almoxarifado/estoque.php">Estoque</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="../almoxarifado/entradas.php">Entradas</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="../almoxarifado/saidas.php">Saídas</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="../fornecedores/fornecedores.php">Fornecedores</a> </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="item">
             <a onclick="menuUsuario()">
                 <img src="../assets/images/menu/usuarios.png" alt="">
             </a>
