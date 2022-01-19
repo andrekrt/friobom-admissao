@@ -131,6 +131,8 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
                                     <li class="list-group-item">Carteira de Vacinação Filhos até 14 anos</li>
                                     <li class="list-group-item">Foto 3x4</li>
                                     <li class="list-group-item">Atestado de Antencedentes Criminais</li>
+                                    <li class="list-group-item">Conta Banco do Brasil ou Caixa</li>
+                                    <li class="list-group-item">CTPS Digital e Exames Admicionais</li>
                                 </ul>
                             </div>
                             
