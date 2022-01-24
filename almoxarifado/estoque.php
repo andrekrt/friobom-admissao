@@ -182,6 +182,8 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                                 <option value="Metro">Metro</option>
                                 <option value="Kg">Kg</option>
                                 <option value="Par">Par</option>
+                                <option value="Caixa">Caixa</option>
+                                <option value="Pacote">Pacote</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -264,6 +266,8 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                                 <option value="Metro">Metro</option>
                                 <option value="Kg">Kg</option>
                                 <option value="Par">Par</option>
+                                <option value="Caixa">Caixa</option>
+                                <option value="Pacote">Pacote</option>
                             </select>
                         </div>
                         <div class="form-group col-md-5 espaco ">
