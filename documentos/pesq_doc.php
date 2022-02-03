@@ -84,24 +84,28 @@ $empRecords = $stmt->fetchAll();
 $data = array();
 
 foreach($empRecords as $row){
+    $excluir = '';
+    $documentao = '';
+    $visulizar = '';
+    if($idUsuario == $row['usuarios_idusuarios'] && $row['situacao']=="Em análise"){
+        $excluir = '<a href="excluir.php?idDocumento='.$row['iddocumentos_admissao'].' " data-id="'.$row['iddocumentos_admissao'].'"  class="btn btn-danger btn-sm deleteBtn" >Deletar</a>';
+    }
+    if($tipoUsuario == 2 && ($row['situacao']=='Currículo Aprovado' || $row['situacao']=='Documentação Pendente')){
+        $documentao = '<a href="form-documentos.php?idDocumento='.$row['iddocumentos_admissao'].' " data-id="'.$row['iddocumentos_admissao'].'"  class="btn btn-danger btn-sm deleteBtn" >Documentação</a>';
+    }
+    if($row['situacao']!='Documentação OK'){
+        $visulizar ='<a href="javascript:void();" data-id="'.$row['iddocumentos_admissao'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  ';
+    }
     $data[] = array(
-            "iddocumentos_admissao"=>$row['iddocumentos_admissao'],
             "data_envio"=>date("d/m/Y H:i", strtotime($row['data_envio'])) ,
             "nome_contratado"=>$row['nome_contratado'],
-            "data_nascimento"=>date("d/m/Y", strtotime($row['data_nascimento'])) ,
-            "sexo"=>$row['sexo'],
             "funcao"=>$row['funcao'],
             "rota"=>$row['rota'],
-            "num_pis"=>$row['num_pis'],
-            "tipo_conta"=>$row['tipo_conta'],
-            "agencia"=>$row['agencia'],
-            "conta"=>$row['conta'],
-            "variacao_op"=>$row['variacao_op'],
-            "documentos"=>' <a target="_blank" href="uploads/'. $row['iddocumentos_admissao'].'" >Anexos</a> ',
-            "situacao"=>$row['situacao'],
+            "documentos"=>' <a target="_blank" href="uploads/'.$row['iddocumentos_admissao'].'" >Anexos</a> ',
+            "situacao"=>$row['situacao'] ,
             "obs"=>$row['obs'],
             "nome_usuario"=>$row['nome_usuario'],
-            "acoes"=> '<a href="javascript:void();" data-id="'.$row['iddocumentos_admissao'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a href="excluir.php?idDocumento='.$row['iddocumentos_admissao'].' " data-id="'.$row['iddocumentos_admissao'].'"  class="btn btn-danger btn-sm deleteBtn" >Deletar</a>'
+            "acoes"=> $visulizar . $excluir . $documentao
         );
 }
 

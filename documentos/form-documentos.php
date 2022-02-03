@@ -7,6 +7,11 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
 
     $nomeUsuario = $_SESSION['nomeUsuario'];
     $tipoUsuario = $_SESSION['tipoUsuario'];
+    $idDocumento = filter_input(INPUT_GET, 'idDocumento');
+    $select = $db->prepare("SELECT * FROM documentos_admissao WHERE iddocumentos_admissao = :idDocumento");
+    $select->bindValue(':idDocumento', $idDocumento);
+    $select->execute();
+    $dado = $select->fetch();
     
 }else{
     echo "<script>alert('Acesso não permitido');</script>";
@@ -50,55 +55,18 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
                 <div class="menu-principal">
                     <form action="add-documentos.php" method="post" enctype="multipart/form-data">
                         <div class="form-row">
+                            <input type="hidden" name="idDocumento" value="<?=$dado['iddocumentos_admissao']?>">
                             <div class="form-group col-md-4 espaco ">
                                 <label for="nome"> Nome completo Funcionário </label>
-                                <input type="text" required name="nome" class="form-control" id="nome">
-                            </div>
-                            <div class="form-group col-md-2 espaco ">
-                                <label for="dataNasc"> Data Nascimento </label>
-                                <input type="date" required name="dataNasc" class="form-control" id="dataNasc">
-                            </div>
-                            <div class="form-group col-md-2 espaco ">
-                                <label for="sexo"> Sexo </label>
-                                <select name="sexo" required id="sexo" class="form-control">
-                                    <option value=""></option>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Feminno">Feminino</option>
-                                </select>
+                                <input type="text" readonly name="nome" class="form-control" id="nome" value="<?=$dado['nome_contratado']?>">
                             </div>
                             <div class="form-group col-md-3 espaco ">
                                 <label for="funcao"> Função </label>
-                                <input type="texts" required name="funcao" class="form-control" id="funcao">
+                                <input type="texts" readonly name="funcao" class="form-control" id="funcao" value="<?=$dado['funcao']?>">
                             </div>
-                        </div>
-                        <div class="form-row">
                             <div class="form-group col-md-2 espaco ">
                                 <label for="rota"> Rota </label>
-                                <input type="text" required name="rota" id="rota" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2 espaco ">
-                                <label for="pis"> Nº PIS </label>
-                                <input type="text" required name="pis" id="pis" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2 espaco">
-                                <label for="tipoConta">Tipo de Conta</label>
-                                <select name="tipoConta" id="tipoConta" class="form-control">
-                                    <option value=""></option>
-                                    <option value="Corrente">Corrente</option>
-                                    <option value="Poupança">Poupança</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2 espaco ">
-                                <label for="agencia"> Agência  </label>
-                                <input type="text" required name="agencia" id="agencia" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2 espaco ">
-                                <label for="conta"> Conta  </label>
-                                <input type="text" required name="conta" id="conta" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2 espaco ">
-                                <label for="variacao"> Variação/Op  </label>
-                                <input type="text" name="variacao" id="variacao" class="form-control">
+                                <input type="text" readonly name="rota" id="rota" class="form-control" value="<?=$dado['rota']?>">
                             </div>
                         </div>
                         <div class="form-row">

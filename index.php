@@ -27,10 +27,10 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false){
             $qtdAnalise = $db->query("SELECT * FROM documentos_admissao WHERE situacao = 'Em Análise'");
             $qtdAnalise = $qtdAnalise->rowCount();
 
-            $qtdPendente = $db->query("SELECT * FROM documentos_admissao WHERE situacao = 'Pendente'");
+            $qtdPendente = $db->query("SELECT * FROM documentos_admissao WHERE situacao = 'Documentação Pendente'");
             $qtdPendente = $qtdPendente->rowCount();
 
-            $qtdOk = $db->query("SELECT * FROM documentos_admissao WHERE situacao = 'Ok'");
+            $qtdOk = $db->query("SELECT * FROM documentos_admissao WHERE situacao = 'Documentação OK'");
             $qtdOk = $qtdOk->rowCount();
 
         }elseif($tipoUsuario==2){
@@ -40,10 +40,10 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false){
             $qtdAnalise = $db->query("SELECT * FROM documentos_admissao WHERE usuarios_idusuarios = '$idUsuario' AND situacao = 'Em Análise'");
             $qtdAnalise = $qtdAnalise->rowCount();
 
-            $qtdPendente = $db->query("SELECT * FROM documentos_admissao WHERE usuarios_idusuarios = '$idUsuario' AND situacao = 'Pendente'");
+            $qtdPendente = $db->query("SELECT * FROM documentos_admissao WHERE usuarios_idusuarios = '$idUsuario' AND situacao = 'Documentação Pendente'");
             $qtdPendente = $qtdPendente->rowCount();
 
-            $qtdOk = $db->query("SELECT * FROM documentos_admissao WHERE usuarios_idusuarios = '$idUsuario' AND situacao = 'Ok'");
+            $qtdOk = $db->query("SELECT * FROM documentos_admissao WHERE usuarios_idusuarios = '$idUsuario' AND situacao = 'Documentação OK'");
             $qtdOk = $qtdOk->rowCount();
         }
         
@@ -92,7 +92,7 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false){
                             <ul class="nav flex-column">
                                 <li class="nav-item"> <a class="nav-link" href="documentos/documentos.php"> Documentações Enviadas </a> </li>
                                 <?php if($tipoUsuario==2): ?>
-                                <li class="nav-item"> <a class="nav-link" href="documentos/form-documentos.php"> Enviar Documentação </a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="documentos/form-curriculo.php"> Enviar Documentação </a> </li>
                                 <?php endif; ?>
                             </ul>
                         </nav>

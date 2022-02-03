@@ -58,15 +58,8 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                             <tr>
                                 <th scope="col" class="text-center text-nowrap" > Data Envio </th>
                                 <th scope="col" class="text-center text-nowrap">Nome Contrado</th>
-                                <th scope="col" class="text-center text-nowrap">Data de Nascimento</th>
-                                <th scope="col" class="text-center text-nowrap">Sexo</th>
                                 <th scope="col" class="text-center text-nowrap"> Função</th>   
-                                <th scope="col" class="text-center text-nowrap"> Rota</th> 
-                                <th scope="col" class="text-center text-nowrap"> PIS</th>     
-                                <th scope="col" class="text-center text-nowrap"> Tipo Conta</th>   
-                                <th scope="col" class="text-center text-nowrap"> Agência</th>   
-                                <th scope="col" class="text-center text-nowrap"> Conta</th>  
-                                <th scope="col" class="text-center text-nowrap"> Varição/OP</th>    
+                                <th scope="col" class="text-center text-nowrap"> Rota</th>  
                                 <th scope="col" class="text-center text-nowrap"> Documentos</th>   
                                 <th scope="col" class="text-center text-nowrap"> Situação</th> 
                                 <th scope="col" class="text-center text-nowrap"> Obs</th>  
@@ -74,7 +67,6 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                                 <th scope="col" class="text-center text-nowrap"> Ações</th>     
                             </tr>
                         </thead>
-                        
                     </table>
                 </div>
             </div>
@@ -82,7 +74,6 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
     </div>
 
     <script src="../assets/js/menu.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/af-2.3.7/date-1.1.0/r-2.2.9/rg-1.1.3/sc-2.0.4/sp-1.3.0/datatables.min.js"></script>
@@ -97,22 +88,15 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                     'url':'pesq_doc.php'
                 },
                 'columns': [
-                    { data: 'data_envio' },
-                    { data: 'nome_contratado' },
-                    { data: 'data_nascimento' },
-                    { data: 'sexo' },
-                    { data: 'funcao' },
-                    { data: 'rota' },
-                    { data: 'num_pis' },
-                    { data: 'tipo_conta' },
-                    { data: 'agencia' },
-                    { data: 'conta' },
-                    { data: 'variacao_op' },
-                    { data: 'documentos' },
-                    { data: 'situacao' },
-                    { data: 'obs' },
-                    { data: 'nome_usuario' },
-                    { data: 'acoes' },
+                    { data: 'data_envio'},
+                    { data: 'nome_contratado'},
+                    { data: 'funcao'},
+                    { data: 'rota'},
+                    { data: 'documentos'},
+                    { data: 'situacao'},
+                    { data: 'obs'},
+                    { data: 'nome_usuario'},
+                    { data: 'acoes'}
                 ],
                 "language":{
                     "url":"//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
@@ -134,24 +118,16 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                 type:'post',
                 success: function(data){
                     var json = JSON.parse(data);
-                    $('#iddocumento').val(json.iddocumentos_admissao);
-                    $('#data_envio').val(json.data_envio);
-                    $('#nome').val(json.nome_contratado);
-                    $('#dataNasc').val(json.data_nascimento);
-                    $('#sexo').val(json.sexo);
+                    $('#id').val(json.iddocumentos_admissao); 
+                    $('#nome').val(json.nome_contratado); 
                     $('#funcao').val(json.funcao);
                     $('#rota').val(json.rota);
-                    $('#pis').val(json.num_pis);
-                    $('#tipoConta').val(json.tipo_conta);
-                    $('#agencia').val(json.agencia);
-                    $('#conta').val(json.conta);
-                    $('#variacao').val(json.variacao_op);
                     $('#situacao').val(json.situacao);
                     $('#obs').val(json.obs);
                 }
             })
         });
-    </script>
+    </script> 
 
 <!-- modal visualisar e editar -->
 <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,81 +139,40 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
             </div>
             <div class="modal-body">
                 <form action="atualiza-doc.php" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="iddocumento" id="iddocumento" value="">
+                    <input type="hidden" name="id" id="id" value="">
                     <input type="hidden" name="trid" id="trid" value="">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="nome" class="col-form-label">Nome</label>
                             <input type="text" class="form-control" name="nome" id="nome" >
                         </div>
-                        <div class="form-group col-md-3 ">
-                            <label for="dataNasc" class="col-form-label"> Data Nascimento </label>
-                            <input type="date" required name="dataNasc" class="form-control" id="dataNasc">
-                        </div>
-                        <div class="form-group col-md-2  ">
-                            <label for="sexo"  class="col-form-label"> Sexo </label>
-                            <select name="sexo" required id="sexo" class="form-control">
-                                <option value=""></option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Feminno">Feminino</option>
-                            </select>
-                        </div>
                         <div class="form-group col-md-3  ">
                             <label for="funcao"  class="col-form-label"> Função </label>
                             <input type="texts" required name="funcao" class="form-control" id="funcao">
                         </div>
-                    </div> 
-                    <div class="form-row">
                         <div class="form-group col-md-2  ">
                             <label for="rota" class="col-form-label"> Rota </label>
                             <input type="text" required name="rota" id="rota" class="form-control">
                         </div>
-                        <div class="form-group col-md-2 ">
-                            <label for="pis" class="col-form-label"> Nº PIS </label>
-                            <input type="text" required name="pis" id="pis" class="form-control">
-                        </div>
-                        <div class="form-group col-md-2 ">
-                            <label for="tipoConta" class="col-form-label">Tipo de Conta</label>
-                            <select name="tipoConta" id="tipoConta" class="form-control">
-                                <option value=""></option>
-                                <option value="Corrente">Corrente</option>
-                                <option value="Poupança">Poupança</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2  ">
-                            <label for="agencia" class="col-form-label"> Agência  </label>
-                            <input type="text" required name="agencia" id="agencia" class="form-control">
-                        </div>
-                        <div class="form-group col-md-2  ">
-                            <label for="conta"  class="col-form-label"> Conta  </label>
-                            <input type="text" required name="conta" id="conta" class="form-control">
-                        </div>
-                        <div class="form-group col-md-2 ">
-                            <label for="variacao" class="col-form-label"> Variação/Op  </label>
-                            <input type="text" name="variacao" id="variacao" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group espaco col-md-12">
-                            <label for="documentos">Anexar Documentação (Verificar Documento que Falta) </label>
-                            <input type="file" name="documentos[]" multiple class="form-control" id="documentos" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
-                        </div>
-                    </div>
+                    </div> 
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="situacao"  class="col-form-label"> Situação </label>
-                            <?php if($tipoUsuario==1): echo $tipoUsuario; ?>
+                            <?php if($tipoUsuario==1):?>
                             <select name="situacao" required id="situacao" class="form-control">
                                 <option value=""></option>
                                 <option value="Em Análise">Em Análise</option>
-                                <option value="Pendente">Pendente</option>
-                                <option value="OK">OK</option>
+                                <option value="Currículo Aprovado">Currículo Aprovado</option>
+                                <option value="Currículo Reprovado">Currículo Reprovado</option>
+                                <option value="Documentação OK">Documentação OK</option>
+                                <option value="Documentação Pendente">Documentação Pendente</option>
+                                <option value="Documentação em Análise">Documentação em Análise</option>
                             </select>
                             <?php elseif($tipoUsuario==2): ?>
                                 <input type="text" name="situacao" readonly id="situacao" class="form-control">
                             <?php endif; ?>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-8">
                             <label for="obs" class="col-form-label">Obs.</label>
                             <input type="text" id="obs" name="obs" class="form-control" <?php if($tipoUsuario==2){echo 'readonly';}   ?> >
                         </div>

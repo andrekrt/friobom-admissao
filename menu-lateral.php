@@ -16,7 +16,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"> <a class="nav-link" href="../documentos/documentos.php"> Documentações Enviadas </a> </li>
                     <?php if($tipoUsuario==2): ?>
-                    <li class="nav-item"> <a class="nav-link" href="../documentos/form-documentos.php"> Enviar Documentação </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="../documentos/form-curriculo.php"> Enviar Documentação </a> </li>
                     <?php endif; ?>
                 </ul>
             </nav>
