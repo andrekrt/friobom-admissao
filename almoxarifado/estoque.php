@@ -191,6 +191,7 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                             <select required name="grupo" id="grupo" class="form-control">
                                 <option value="Material de Escritório">Material de Escritório</option>
                                 <option value="EPI">EPI</option>
+                                <option value="Fardamento">Fardamento</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -276,6 +277,7 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                                 <option value=""></option>
                                 <option value="Material de Escritório">Material de Escritório</option>
                                 <option value="EPI">EPI</option>
+                                <option value="Fardamento">Fardamento</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2 espaco ">
