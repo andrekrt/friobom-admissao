@@ -112,6 +112,17 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false){
                         </nav>
                     </div>
                     <div class="item">
+                        <a onclick="menuRescisao()">
+                            <img src="assets/images/menu/rescisao.png" alt="">
+                        </a>
+                        <nav id="submenuRescisao">
+                            <ul class="nav flex-column">
+                                <li class="nav-item"> <a class="nav-link" href="rescisao/form-rescisao.php">Registrar Rescisão</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="rescisao/rescisoes.php">Rescisões</a> </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="item">
                         <a onclick="menuUsuario()">
                             <img src="assets/images/menu/usuarios.png" alt="">
                         </a>

@@ -28,6 +28,16 @@ function menuAlmoxarifado(){
     
 }
 
+function menuRescisao(){
+
+    if(document.getElementById("submenuRescisao").style.display == "none" || document.getElementById("submenuRescisao").style.display == "" ){
+        document.getElementById("submenuRescisao").style.display = "block";
+    }else{
+        document.getElementById("submenuRescisao").style.display = "none";
+    }
+    
+}
+
 function abrirMenuMobile(){
     if(document.getElementById('menu-lateral').style.display=='none' || document.getElementById('menu-lateral').style.display==''){
         document.getElementById('menu-lateral').style.display='block';

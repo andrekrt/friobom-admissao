@@ -327,6 +327,11 @@ a .nome{
     margin: 5px;
 }
 
+.form-check-inline{
+    padding-left: 20px !important ; 
+    width: 30%;
+}
+
 /*mobile*/
 @media(max-width:768px){
     .area-indice-val{
