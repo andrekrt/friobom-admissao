@@ -65,8 +65,8 @@ foreach($empRecords as $row){
         "admissao"=>date("d/m/Y", strtotime($row['admissao'])) ,
         "demissao"=>date("d/m/Y", strtotime($row['demissao'])) ,
         "valor"=>"R$".str_replace(".",",",$row['valor']),
-        "motivo_saida"=>$row['motivo_saida'],
-        "nome_responsavel"=>$row['nome_responsavel'],
+        "motivo_saida"=>ucfirst($row['motivo_saida']) ,
+        "nome_responsavel"=>ucfirst($row['nome_responsavel']),
         "acoes"=> '<a href="javascript:void();" data-id="'.$row['idchecklist_rescisao'].'"  class="btn btn-info btn-sm editbtn" >Detalhes</a> <a target=_blank href="ficha.php?id='.$row['idchecklist_rescisao'].'" data-id="'.$row['idchecklist_rescisao'].'"  class="btn btn-success btn-sm " >Imprimir</a> '
     );
 }
