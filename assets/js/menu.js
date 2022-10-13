@@ -38,6 +38,16 @@ function menuRescisao(){
     
 }
 
+function menuAdvertencia(){
+
+    if(document.getElementById("submenuAdvertencia").style.display == "none" || document.getElementById("submenuAdvertencia").style.display == "" ){
+        document.getElementById("submenuAdvertencia").style.display = "block";
+    }else{
+        document.getElementById("submenuAdvertencia").style.display = "none";
+    }
+    
+}
+
 function abrirMenuMobile(){
     if(document.getElementById('menu-lateral').style.display=='none' || document.getElementById('menu-lateral').style.display==''){
         document.getElementById('menu-lateral').style.display='block';

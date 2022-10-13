@@ -123,6 +123,17 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false){
                         </nav>
                     </div>
                     <div class="item">
+                        <a onclick="menuAdvertencia()">
+                            <img src="assets/images/menu/menu-advertencia.jpg" alt="">
+                        </a>
+                        <nav id="submenuAdvertencia">
+                            <ul class="nav flex-column">
+                                <li class="nav-item"> <a class="nav-link" href="advertencias/form-advertencia.php">Registrar Advertência/Suspensão</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="advertencias/advertencias.php">Advertências</a> </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="item">
                         <a onclick="menuUsuario()">
                             <img src="assets/images/menu/usuarios.png" alt="">
                         </a>
