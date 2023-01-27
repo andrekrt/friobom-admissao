@@ -48,6 +48,16 @@ function menuAdvertencia(){
     
 }
 
+function menuEntrevista(){
+
+    if(document.getElementById("submenuEntrevista").style.display == "none" || document.getElementById("submenuEntrevista").style.display == "" ){
+        document.getElementById("submenuEntrevista").style.display = "block";
+    }else{
+        document.getElementById("submenuEntrevista").style.display = "none";
+    }
+    
+}
+
 function abrirMenuMobile(){
     if(document.getElementById('menu-lateral').style.display=='none' || document.getElementById('menu-lateral').style.display==''){
         document.getElementById('menu-lateral').style.display='block';
