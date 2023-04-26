@@ -119,6 +119,8 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false){
                             <ul class="nav flex-column">
                                 <li class="nav-item"> <a class="nav-link" href="rescisao/form-rescisao.php">Registrar Rescisão</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="rescisao/rescisoes.php">Rescisões</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="rescisao/form-distrato.php">Registrar Distrato</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="rescisao/distratos.php">Distratos</a> </li>
                             </ul>
                         </nav>
                     </div>

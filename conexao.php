@@ -1,6 +1,6 @@
 <?php
 
-$dsn = "mysql:dbname=controle_admissao;host=127.0.0.1";
+$dsn = "mysql:dbname=rh;host=127.0.0.1";
 $dbuser = "root";
 $dbpass = "";
 $options = array(
