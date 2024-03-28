@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario'] ==2){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ( $_SESSION['tipoUsuario'] ==2 || $_SESSION['tipoUsuario']==99)){
 
     $nomeUsuario = $_SESSION['nomeUsuario'];
     $tipoUsuario = $_SESSION['tipoUsuario'];
@@ -76,5 +76,25 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
         <script src="../assets/js/jquery.js"></script>
         <script src="../assets/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/menu.js"></script>
+        <!-- sweert alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- msg de sucesso ou erro -->
+<?php
+    // Verifique se há uma mensagem de confirmação na sessão
+    if (isset($_SESSION['msg']) && isset($_SESSION['icon'])) {
+        // Exiba um alerta SweetAlert
+        echo "<script>
+                Swal.fire({
+                  icon: '$_SESSION[icon]',
+                  title: '$_SESSION[msg]',
+                  showConfirmButton: true,
+                });
+              </script>";
+
+        // Limpe a mensagem de confirmação da sessão
+        unset($_SESSION['msg']);
+        unset($_SESSION['status']);
+    }
+?>
     </body>
 </html>
