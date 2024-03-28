@@ -3,32 +3,35 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario'] ==1 ){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ($_SESSION['tipoUsuario'] ==1 || $_SESSION['tipoUsuario']==99) ){
 
     $idAdvertencia = filter_input(INPUT_GET, 'id');
     
 
-    // echo "$nomeFuncionario<br>$funcao<br>$dataOcorrencia<br>$assunto<br>$motivo<br>$diasSuspenso<br>$dataRetorno";
+   $db->beginTransaction();
 
-    /*echo "$nomeFuncionario<br>$funcao<br>$admissao<br>$demissao<br>$valorFormt<br><br>";
-    echo "$material<br>$contraCheque<br>$xeroxCtps<br>$devolucaoCtps<br>$valeTransporte<br>$planoSaude<br>$contratoExperiencia<br>$livroAssinado<br>$valorDescontado<br>$verificado1221<br>$semCarteira<br>$recibos<br>$exames<br>$cartaDemissao<br>$motivoSaida<br>$ponto<br>$ferias<br>$chip<br>$assinado1221<br>$planoCancelado<br>$desativado";*/
-
+   try{
     $sql = $db->prepare("DELETE FROM advertencias WHERE idadvertencia = :idadvertencia");
     $sql->bindValue(':idadvertencia', $idAdvertencia);
+    $sql->execute();
 
-    if($sql->execute()){
-        echo "<script>alert('Advertência Excluída!');</script>";
-        echo "<script>window.location.href='advertencias.php'</script>";
+    $db->commit();
 
-    }else{
-        print_r($sql->errorInfo());
-    }
+    $_SESSION['msg'] = 'Advertência Excluída com Sucesso!';
+    $_SESSION['icon']='success';
+
+   }catch(Exception $e){
+    $db->rollBack();
+    $_SESSION['msg'] = 'Erro ao Excluir Advertência!';
+    $_SESSION['icon']='error';
+   }    
 
 }else{
 
-    echo "<script>alert('Acesso não permitido');</script>";
-    echo "<script>window.location.href='../index.php'</script>";
+    $_SESSION['msg'] = 'Acesso não permitido!';
+    $_SESSION['icon']='warning';
 
 }
-
+header("Location: advertencias.php");
+exit(); 
 ?>

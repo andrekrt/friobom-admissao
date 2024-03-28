@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $_SESSION['tipoUsuario'] == 1 ) {
+if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && ($_SESSION['tipoUsuario'] == 1 || $_SESSION['tipoUsuario']==99) ) {
 
     $tipoUsuario = $_SESSION['tipoUsuario'];    
    
@@ -88,7 +88,8 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/af-2.3.7/date-1.1.0/r-2.2.9/rg-1.1.3/sc-2.0.4/sp-1.3.0/datatables.min.js"></script>
-    
+    <!-- sweert alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function(){
             $('#tableForn').DataTable({
@@ -273,19 +274,19 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                     <div class="form-row">
                         <div class="form-group col-md-3 espaco ">
                             <label for="endereco"> Endereço </label>
-                            <input type="text" class="form-control" id="endereco" name="endereco">
+                            <input type="text" class="form-control" required id="endereco" name="endereco">
                         </div>
                         <div class="form-group col-md-2 espaco ">
                             <label for="bairro"> Bairro </label>
-                            <input type="text" class="form-control" id="bairro" name="bairro">
+                            <input type="text" class="form-control" required id="bairro" name="bairro">
                         </div>
                         <div class="form-group col-md-2 espaco ">
                             <label for="cidade"> Cidade </label>
-                            <input type="text" class="form-control" id="cidade" name="cidade">
+                            <input type="text" class="form-control" required id="cidade" name="cidade">
                         </div>
                         <div class="form-group col-md-2 espaco ">
                             <label for="estado"> Estado </label>
-                            <select name="estado" id="estado" class="form-control">
+                            <select name="estado" id="estado" required class="form-control">
                                 <option value="">Selecione</option>
                                 <option value="AC">AC</option>
                                 <option value="AL">AL</option>
@@ -318,7 +319,7 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
                         </div>
                         <div class="form-group col-md-3 espaco ">
                             <label for="cep"> CEP </label>
-                            <input type="text" class="form-control" id="cep" name="cep">
+                            <input type="text" class="form-control" required id="cep" name="cep">
                         </div>
                     </div> 
             </div>
@@ -341,6 +342,43 @@ if (isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $
         $("#telefone").mask("(00)00000-0000");
         $("#telefoneEdi").mask("(00)00000-0000");
     });
+
+    function confirmaDelete(id){
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: 'Você realmente deseja excluir esse Fornecedor?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, Excluir!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Se o usuário confirmar, redirecione para a página de exclusão
+                window.location.href = 'excluir-forn.php?idForn=' + id;
+            }
+        });
+    }
 </script>
+
+<!-- msg de sucesso ou erro -->
+<?php
+    // Verifique se há uma mensagem de confirmação na sessão
+    if (isset($_SESSION['msg']) && isset($_SESSION['icon'])) {
+        // Exiba um alerta SweetAlert
+        echo "<script>
+                Swal.fire({
+                  icon: '$_SESSION[icon]',
+                  title: '$_SESSION[msg]',
+                  showConfirmButton: true,
+                });
+              </script>";
+
+        // Limpe a mensagem de confirmação da sessão
+        unset($_SESSION['msg']);
+        unset($_SESSION['status']);
+    }
+?>
 </body>
 </html>

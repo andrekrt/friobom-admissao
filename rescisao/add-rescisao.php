@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario'] ==1 ){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ($_SESSION['tipoUsuario'] ==1 || $_SESSION['tipoUsuario']==99) ){
 
     $nomeFuncionario = filter_input(INPUT_POST, 'nome');
     $funcao = filter_input(INPUT_POST, 'funcao');
@@ -36,51 +36,55 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
     $planoCancelado = filter_input(INPUT_POST, 'planoCancelado')?1:0;
     $desativado = filter_input(INPUT_POST, 'desativado')?1:0;  
 
-    /*echo "$nomeFuncionario<br>$funcao<br>$admissao<br>$demissao<br>$valorFormt<br><br>";
-    echo "$material<br>$contraCheque<br>$xeroxCtps<br>$devolucaoCtps<br>$valeTransporte<br>$planoSaude<br>$contratoExperiencia<br>$livroAssinado<br>$valorDescontado<br>$verificado1221<br>$semCarteira<br>$recibos<br>$exames<br>$cartaDemissao<br>$motivoSaida<br>$ponto<br>$ferias<br>$chip<br>$assinado1221<br>$planoCancelado<br>$desativado";*/
+    $db->beginTransaction();
 
-    $sql = $db->prepare("INSERT INTO checklist_rescisao (nome_funcionario, funcao, admissao, demissao, valor, material, contra_cheque, copia_ctps, devolucao_ctps, vale_transporte, plano_saude, contrato_experiencia, livro_assinado, vales_descontado, tit_aberto, sem_carteira, recibo, exame, carta_demissao, motivo_saida, ponto, ferias, chip, assinada_1221, plano_cancelado, desativado, nome_responsavel) VALUES (:funcionario, :funcao, :admissao, :demissao, :valor, :material, :contra_cheque, :copiaCtps, :devolusaoCtps, :valeTransporte, :planoSaude, :contratoExperiencia, :livroAssinado, :valesDescontado, :titAberto, :semCarteira, :recibo, :exame, :cartaDemissao, :motivoSaida, :ponto, :ferias, :chip, :assinada1221, :planoCancelado, :desativado, :responsavel)");
-    $sql->bindValue(':funcionario', $nomeFuncionario);
-    $sql->bindValue(':funcao', $funcao);
-    $sql->bindValue(':admissao', $admissao);
-    $sql->bindValue(':demissao', $demissao);
-    $sql->bindValue(':valor', $valorFormt);
-    $sql->bindValue(':material', $material);
-    $sql->bindValue(':contra_cheque', $contraCheque);
-    $sql->bindValue(':copiaCtps', $xeroxCtps);
-    $sql->bindValue(':devolusaoCtps', $devolucaoCtps);
-    $sql->bindValue(':valeTransporte', $valeTransporte);
-    $sql->bindValue(':planoSaude', $planoSaude);
-    $sql->bindValue(':contratoExperiencia', $contratoExperiencia);
-    $sql->bindValue(':livroAssinado', $livroAssinado);
-    $sql->bindValue(':valesDescontado', $valorDescontado);
-    $sql->bindValue(':titAberto', $verificado1221);
-    $sql->bindValue(':semCarteira', $semCarteira);
-    $sql->bindValue(':recibo', $recibos);
-    $sql->bindValue(':exame', $exames);
-    $sql->bindValue(':cartaDemissao', $cartaDemissao);
-    $sql->bindValue(':motivoSaida', $motivoSaida);
-    $sql->bindValue(':ponto', $ponto);
-    $sql->bindValue(':ferias', $ferias);
-    $sql->bindValue(':chip', $chip);
-    $sql->bindValue(':assinada1221', $assinado1221);
-    $sql->bindValue(':planoCancelado', $planoCancelado);
-    $sql->bindValue(':desativado', $desativado);
-    $sql->bindValue(':responsavel', $responsavel);
+    try{
+        $sql = $db->prepare("INSERT INTO checklist_rescisao (nome_funcionario, funcao, admissao, demissao, valor, material, contra_cheque, copia_ctps, devolucao_ctps, vale_transporte, plano_saude, contrato_experiencia, livro_assinado, vales_descontado, tit_aberto, sem_carteira, recibo, exame, carta_demissao, motivo_saida, ponto, ferias, chip, assinada_1221, plano_cancelado, desativado, nome_responsavel) VALUES (:funcionario, :funcao, :admissao, :demissao, :valor, :material, :contra_cheque, :copiaCtps, :devolusaoCtps, :valeTransporte, :planoSaude, :contratoExperiencia, :livroAssinado, :valesDescontado, :titAberto, :semCarteira, :recibo, :exame, :cartaDemissao, :motivoSaida, :ponto, :ferias, :chip, :assinada1221, :planoCancelado, :desativado, :responsavel)");
+        $sql->bindValue(':funcionario', $nomeFuncionario);
+        $sql->bindValue(':funcao', $funcao);
+        $sql->bindValue(':admissao', $admissao);
+        $sql->bindValue(':demissao', $demissao);
+        $sql->bindValue(':valor', $valorFormt);
+        $sql->bindValue(':material', $material);
+        $sql->bindValue(':contra_cheque', $contraCheque);
+        $sql->bindValue(':copiaCtps', $xeroxCtps);
+        $sql->bindValue(':devolusaoCtps', $devolucaoCtps);
+        $sql->bindValue(':valeTransporte', $valeTransporte);
+        $sql->bindValue(':planoSaude', $planoSaude);
+        $sql->bindValue(':contratoExperiencia', $contratoExperiencia);
+        $sql->bindValue(':livroAssinado', $livroAssinado);
+        $sql->bindValue(':valesDescontado', $valorDescontado);
+        $sql->bindValue(':titAberto', $verificado1221);
+        $sql->bindValue(':semCarteira', $semCarteira);
+        $sql->bindValue(':recibo', $recibos);
+        $sql->bindValue(':exame', $exames);
+        $sql->bindValue(':cartaDemissao', $cartaDemissao);
+        $sql->bindValue(':motivoSaida', $motivoSaida);
+        $sql->bindValue(':ponto', $ponto);
+        $sql->bindValue(':ferias', $ferias);
+        $sql->bindValue(':chip', $chip);
+        $sql->bindValue(':assinada1221', $assinado1221);
+        $sql->bindValue(':planoCancelado', $planoCancelado);
+        $sql->bindValue(':desativado', $desativado);
+        $sql->bindValue(':responsavel', $responsavel);
+        $sql->execute();
 
-    if($sql->execute()){
-        echo "<script>alert('Rescisão Lançada!');</script>";
-        echo "<script>window.location.href='form-rescisao.php'</script>";
+        $db->commit();
 
-    }else{
-        print_r($sql->errorInfo());
-    }
+        $_SESSION['msg'] = 'Rescisão Lançada com Sucesso!';
+        $_SESSION['icon']='success';
+
+    }catch(Exception $e){
+        $db->rollBack();
+        $_SESSION['msg'] = 'Erro ao Lançar Rescisão!';
+        $_SESSION['icon']='error';
+    }    
 
 }else{
 
-    echo "<script>alert('Acesso não permitido');</script>";
-    echo "<script>window.location.href='../index.php'</script>";
-
+    $_SESSION['msg'] = 'Acesso não permitido!';
+    $_SESSION['icon']='warning';
 }
-
+header("Location: form-rescisao.php");
+exit(); 
 ?>

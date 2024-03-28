@@ -68,7 +68,7 @@ foreach($empRecords as $row){
             "valor_total"=>"R$ " . str_replace(".", ",",$row['valor_total']),
             "nome_fantasia"=>$row['nome_fantasia'],
             "nome_usuario"=>$row['nome_usuario'],
-            "acoes"=> '<a href="javascript:void();" data-id="'.$row['idestoque_entradas'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a href="excluir-entrada.php?idEntrada='.$row['idestoque_entradas'].' " data-id="'.$row['idestoque_entradas'].'"  class="btn btn-danger btn-sm deleteBtn" >Deletar</a>'
+            "acoes"=> '<a href="javascript:void();" data-id="'.$row['idestoque_entradas'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a  data-id="'.$row['idestoque_entradas'].'"  class="btn btn-danger btn-sm deleteBtn" onclick=\'confirmaDelete(' . $row['idestoque_entradas'] . ')\'>Deletar</a>'
         );
 }
 

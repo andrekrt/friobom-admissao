@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario']==1 ){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ($_SESSION['tipoUsuario']==1 || $_SESSION['tipoUsuario']==99) ){
 
     $idUsuario = $_SESSION['idUsuario'];
     $razaoSocial = filter_input(INPUT_POST, 'razaoSocial');
@@ -16,15 +16,20 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
     $nome_fantasia = filter_input(INPUT_POST, 'nomeFantasia');
     $telefone = filter_input(INPUT_POST, 'telefone');
 
-    $verificaCnpj = $db->prepare("SELECT * FROM fornecedores WHERE cnpj = :cnpj");
-    $verificaCnpj->bindValue(':cnpj', $cnpj);
-    $verificaCnpj->execute();
-    if($verificaCnpj->rowCount()>0){
+    $db->beginTransaction();
 
-        echo "<script>alert('Esse Fornecedor já está cadastrado!');</script>";
-        echo "<script>window.location.href='fornecedores.php'</script>";
+    try{
+        $verificaCnpj = $db->prepare("SELECT * FROM fornecedores WHERE cnpj = :cnpj");
+        $verificaCnpj->bindValue(':cnpj', $cnpj);
+        $verificaCnpj->execute();
+        if($verificaCnpj->rowCount()>0){
 
-    }else{
+            $_SESSION['msg'] = 'Esse Fornecedor já está cadastrado!';
+            $_SESSION['icon']='warning';
+            header("Location: fornecedores.php");
+            exit(); 
+
+        }
 
         $inserir = $db->prepare("INSERT INTO fornecedores (razao_social, endereco, bairro, cidade, cep, uf, cnpj, nome_fantasia, telefone, usuarios_idusuarios) VALUES (:razaosocial, :endereco, :bairro, :cidade, :cep, :uf, :cnpj, :nomeFantasia, :telefone, :usuarios)");
         $inserir->bindValue(':razaosocial', $razaoSocial);
@@ -37,18 +42,23 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
         $inserir->bindValue(':nomeFantasia', $nome_fantasia);
         $inserir->bindValue(':telefone', $telefone);
         $inserir->bindValue(':usuarios', $idUsuario);
+        $inserir->execute();
 
-        if($inserir->execute()){
-            echo "<script>alert('Fornecedor Cadastrado com Sucesso!');</script>";
-            echo "<script>window.location.href='fornecedores.php'</script>";
-        }else{
-            print_r($inserir->errorInfo());
-        }
+        $db->commit();
 
+        $_SESSION['msg'] = 'Fornecedor Cadastrado com Sucesso!';
+        $_SESSION['icon']='success';
+        
+    }catch(Exception $e){
+        $db->rollBack();
+        $_SESSION['msg'] = 'Erro ao Cadastrar Material!';
+        $_SESSION['icon']='error';
     }
 
-    
-
+}else{
+    $_SESSION['msg'] = 'Acesso não permitido!';
+    $_SESSION['icon']='warning';
 }
-
+header("Location: fornecedores.php");
+exit(); 
 ?>

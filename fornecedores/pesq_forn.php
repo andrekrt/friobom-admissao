@@ -71,7 +71,7 @@ foreach($empRecords as $row){
             "nome_fantasia"=>$row['nome_fantasia'],
             "telefone"=>$row['telefone'],
             "nome_usuario"=>$row['nome_usuario'],
-            "acoes"=> '<a href="javascript:void();" data-id="'.$row['idfornecedores'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a href="excluir-forn.php?idForn='.$row['idfornecedores'].' " data-id="'.$row['idfornecedores'].'"  class="btn btn-danger btn-sm deleteBtn" >Deletar</a>'
+            "acoes"=> '<a href="javascript:void();" data-id="'.$row['idfornecedores'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a  data-id="'.$row['idfornecedores'].'"  class="btn btn-danger btn-sm deleteBtn" onclick=\'confirmaDelete(' . $row['idfornecedores'] . ')\'>Deletar</a>'
         );
 }
 

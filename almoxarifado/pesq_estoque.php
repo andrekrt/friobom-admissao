@@ -59,20 +59,20 @@ $data = array();
 
 foreach($empRecords as $row){
     $data[] = array(
-            "idmaterial_estoque"=>$row['idmaterial_estoque'],
-            "descricao_material"=>$row['descricao_material'],
-            "grupo_material"=>$row['grupo_material'] ,
-            "un_medida"=>$row['un_medida'],
-            "estoque_minimo"=>str_replace(".",",",$row['estoque_minimo']),
-            "total_entrada"=>str_replace(".",",",$row['total_entrada']),
-            "total_saida"=>str_replace(".",",",$row['total_saida']),
-            "total_estoque"=>str_replace(".",",",$row['total_estoque']),
-            "valor_comprado"=>"R$ ". str_replace(".",",",$row['valor_comprado']),
-            "situacao"=>$row['situacao'],
-            "data_cadastro"=>date("d/m/Y", strtotime($row['data_cadastro'])),
-            "nome_usuario"=>$row['nome_usuario'],
-            "acoes"=> '<a href="javascript:void();" data-id="'.$row['idmaterial_estoque'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a href="excluir-material.php?idMaterial='.$row['idmaterial_estoque'].' " data-id="'.$row['idmaterial_estoque'].'"  class="btn btn-danger btn-sm deleteBtn" >Deletar</a>'
-        );
+        "idmaterial_estoque"=>$row['idmaterial_estoque'],
+        "descricao_material"=>$row['descricao_material'],
+        "grupo_material"=>$row['grupo_material'] ,
+        "un_medida"=>$row['un_medida'],
+        "estoque_minimo"=>str_replace(".",",",$row['estoque_minimo']),
+        "total_entrada"=>str_replace(".",",",$row['total_entrada']),
+        "total_saida"=>str_replace(".",",",$row['total_saida']),
+        "total_estoque"=>str_replace(".",",",$row['total_estoque']),
+        "valor_comprado"=>"R$ ". str_replace(".",",",$row['valor_comprado']),
+        "situacao"=>$row['situacao'],
+        "data_cadastro"=>date("d/m/Y", strtotime($row['data_cadastro'])),
+        "nome_usuario"=>$row['nome_usuario'],
+        "acoes"=> '<a href="javascript:void();" data-id="'.$row['idmaterial_estoque'].'"  class="btn btn-info btn-sm editbtn" >Visualizar</a>  <a  data-id="'.$row['idmaterial_estoque'].'"  class="btn btn-danger btn-sm deleteBtn" onclick=\'confirmaDelete(' . $row['idmaterial_estoque'] . ')\'>Deletar</a>'
+    );
 }
 
 ## Response

@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario'] ==1 ){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ($_SESSION['tipoUsuario'] ==1 || $_SESSION['tipoUsuario']==99) ){
 
     $nomeFuncionario = filter_input(INPUT_POST, 'nome');
     $funcao = filter_input(INPUT_POST, 'funcao');
@@ -26,41 +26,46 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
     $assinado1221 = filter_input(INPUT_POST, 'assinado1221')?1:0;
     $planoCancelado = filter_input(INPUT_POST, 'planoCancelado')?1:0;    
 
-    // echo "$nomeFuncionario<br>$funcao<br>$admissao<br>$demissao<br>$valorFormt<br>";
-    // echo "$distrato<br>$nfs<br>$planoSaude<br>$contrato<br>$valorDescontado<br>$verificado1221<br>$motivoSaida<br>$chip<br>$assinado1221<br>$planoCancelado<br>$desativado";
+    $db->beginTransaction();
 
-    $sql = $db->prepare("INSERT INTO checklist_distrato (nome_funcionario, funcao, admissao, demissao, valor, motivo_saida, nome_responsavel, distrato, nfs, plano_saude, contrato, descontado, debito, desativado, chip, assinada_1221, plano_cancelado) VALUES (:funcionario, :funcao, :admissao, :demissao, :valor, :motivoSaida, :responsavel, :distrato, :nfs, :planoSaude, :contrato, :desconto, :debito, :desativado, :chip, :assinada1221, :planoCancelado)");
-    $sql->bindValue(':funcionario', $nomeFuncionario);
-    $sql->bindValue(':funcao', $funcao);
-    $sql->bindValue(':admissao', $admissao);
-    $sql->bindValue(':demissao', $demissao);
-    $sql->bindValue(':valor', $valorFormt);
-    $sql->bindValue(':motivoSaida', $motivoSaida);
-    $sql->bindValue(':responsavel', $responsavel);
-    $sql->bindValue(':distrato', $distrato);
-    $sql->bindValue(':nfs', $nfs);
-    $sql->bindValue(':planoSaude', $planoSaude);
-    $sql->bindValue(':contrato', $contrato);
-    $sql->bindValue(':desconto', $valorDescontado);
-    $sql->bindValue(':debito', $verificado1221);
-    $sql->bindValue(':desativado', $desativado);
-    $sql->bindValue(':chip', $chip);
-    $sql->bindValue(':assinada1221', $assinado1221);
-    $sql->bindValue(':planoCancelado', $planoCancelado);
+    try{
+        $sql = $db->prepare("INSERT INTO checklist_distrato (nome_funcionario, funcao, admissao, demissao, valor, motivo_saida, nome_responsavel, distrato, nfs, plano_saude, contrato, descontado, debito, desativado, chip, assinada_1221, plano_cancelado) VALUES (:funcionario, :funcao, :admissao, :demissao, :valor, :motivoSaida, :responsavel, :distrato, :nfs, :planoSaude, :contrato, :desconto, :debito, :desativado, :chip, :assinada1221, :planoCancelado)");
+        $sql->bindValue(':funcionario', $nomeFuncionario);
+        $sql->bindValue(':funcao', $funcao);
+        $sql->bindValue(':admissao', $admissao);
+        $sql->bindValue(':demissao', $demissao);
+        $sql->bindValue(':valor', $valorFormt);
+        $sql->bindValue(':motivoSaida', $motivoSaida);
+        $sql->bindValue(':responsavel', $responsavel);
+        $sql->bindValue(':distrato', $distrato);
+        $sql->bindValue(':nfs', $nfs);
+        $sql->bindValue(':planoSaude', $planoSaude);
+        $sql->bindValue(':contrato', $contrato);
+        $sql->bindValue(':desconto', $valorDescontado);
+        $sql->bindValue(':debito', $verificado1221);
+        $sql->bindValue(':desativado', $desativado);
+        $sql->bindValue(':chip', $chip);
+        $sql->bindValue(':assinada1221', $assinado1221);
+        $sql->bindValue(':planoCancelado', $planoCancelado);
+        $sql->execute();
 
-    if($sql->execute()){
-        echo "<script>alert('Distrato Lançado!');</script>";
-        echo "<script>window.location.href='form-distrato.php'</script>";
+        $db->commit();
 
-    }else{
-        print_r($sql->errorInfo());
+        $_SESSION['msg'] = 'Distrato Lançada com Sucesso!';
+        $_SESSION['icon']='success';
+
+    }catch(Exception $e){
+        $db->rollBack();
+        $_SESSION['msg'] = 'Erro ao Lançar Distrato!';
+        $_SESSION['icon']='error';
     }
 
 }else{
 
-    echo "<script>alert('Acesso não permitido');</script>";
-    echo "<script>window.location.href='../index.php'</script>";
+    $_SESSION['msg'] = 'Acesso não permitido!';
+    $_SESSION['icon']='warning';
 
 }
-
+header("Location: form-distrato.php");
+exit(); 
 ?>

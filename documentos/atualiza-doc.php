@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario'] ==1 || $_SESSION['tipoUsuario']==2 ){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ($_SESSION['tipoUsuario'] ==1 || $_SESSION['tipoUsuario']==2 || $_SESSION['tipoUsuario']==99) ){
 
     $idDocumentacao = filter_input(INPUT_POST, 'id');
 
@@ -13,39 +13,35 @@ if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SE
     $situacao = filter_input(INPUT_POST, 'situacao');
     $obs = filter_input(INPUT_POST, 'obs');
 
-    //echo "$nome<br>$funcao<br>$rota<br>$situacao<br>$obs<br>";
+    $db->beginTransaction();
 
-    $sql = $db->prepare("UPDATE documentos_admissao SET nome_contratado = :nome, funcao = :funcao, rota = :rota, situacao = :situacao, obs = :obs WHERE iddocumentos_admissao = :idDocumentos ");
-    $sql->bindValue(':idDocumentos', $idDocumentacao);
-    $sql->bindValue(':nome', $nome);
-    $sql->bindValue(':funcao', $funcao);
-    $sql->bindValue(':rota', $rota);
-    $sql->bindValue(':situacao', $situacao);
-    $sql->bindValue(':obs', $obs);
+    try{
+        $sql = $db->prepare("UPDATE documentos_admissao SET nome_contratado = :nome, funcao = :funcao, rota = :rota, situacao = :situacao, obs = :obs WHERE iddocumentos_admissao = :idDocumentos ");
+        $sql->bindValue(':idDocumentos', $idDocumentacao);
+        $sql->bindValue(':nome', $nome);
+        $sql->bindValue(':funcao', $funcao);
+        $sql->bindValue(':rota', $rota);
+        $sql->bindValue(':situacao', $situacao);
+        $sql->bindValue(':obs', $obs);
+        $sql->execute();
 
-    if($sql->execute()){
+        $db->commit();
 
-        // $diretorioPrincipal = "uploads/".$idDocumentacao;
+        $_SESSION['msg'] = 'Curriculo Atualizado com Sucesso!';
+        $_SESSION['icon']='success';
 
-        // for($i=0;$i<count($documentosAnexos['name']);$i++){
-        //     $destino = $diretorioPrincipal."/". $documentosAnexos['name'][$i];
-        //     move_uploaded_file($documentosAnexos['tmp_name'][$i],$destino);
-        // }
-
-        echo "<script>alert('Atualizado!');</script>";
-        echo "<script>window.location.href='documentos.php'</script>";
-
-    }else{
-        print_r($sql->errorInfo());
-    }
-
-
+    }catch(Exception $e){
+        $db->rollBack();
+        $_SESSION['msg'] = 'Erro ao Atualizar Curriculo!';
+        $_SESSION['icon']='error';
+    }  
 
 }else{
 
-    echo "<script>alert('Acesso não permitido');</script>";
-    echo "<script>window.location.href='../index.php'</script>";
+    $_SESSION['msg'] = 'Acesso não permitido!';
+    $_SESSION['icon']='warning';
 
 }
-
+header("Location: documentos.php");
+exit(); 
 ?>

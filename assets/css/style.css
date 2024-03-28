@@ -78,11 +78,12 @@ body{
 .corpo{
     display: flex;
     flex-direction: row;
-    background-color: #E6E6E6;
+    background-color: #fff;
+    padding-left: 0 !important;
 }
 
 .tela-principal{
-    width: 85%;   
+    width: calc(100% - 83px);   
 }
 
 /*tela principal*/
@@ -169,7 +170,7 @@ body{
 }
 
 .indice-ind{
-    background-color: #fff;
+    background-color: #e0e0de;
     width: 180px;
     margin: auto;
     height: 120px;

@@ -65,7 +65,7 @@ foreach($empRecords as $row){
         "data_ocorrencia"=>date("d/m/Y", strtotime($row['data_ocorrencia'])) ,
         "assunto"=>($row['assunto']) ,
         "usuario"=>ucfirst($row['nome_usuario']),
-        "acoes"=> '<a href="form-edit.php?id='.$row['idadvertencia'].'" data-id="'.$row['idadvertencia'].'"  class="btn btn-info btn-sm editbtn" >Editar</a> <a target=_blank href="advertencia-pdf.php?id='.$row['idadvertencia'].'" data-id="'.$row['idadvertencia'].'"  class="btn btn-success btn-sm " >Imprimir</a> <a href="excluir.php?id='.$row['idadvertencia'].'" data-id="'.$row['idadvertencia'].'"  class="btn btn-danger btn-sm editbtn" >Excluir</a>'
+        "acoes"=> '<a href="form-edit.php?id='.$row['idadvertencia'].'" data-id="'.$row['idadvertencia'].'"  class="btn btn-info btn-sm editbtn" >Editar</a> <a target=_blank href="advertencia-pdf.php?id='.$row['idadvertencia'].'" data-id="'.$row['idadvertencia'].'"  class="btn btn-success btn-sm " >Imprimir</a> <a  data-id="'.$row['idadvertencia'].'"  class="btn btn-danger btn-sm editbtn" onclick=\'confirmaDelete(' . $row['idadvertencia'] . ')\'>Excluir</a>'
     );
 }
 

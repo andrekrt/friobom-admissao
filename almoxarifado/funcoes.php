@@ -1,7 +1,5 @@
 <?php
 
-require("../conexao.php");
-
 function atualizaEstoque($idMaterial){
     require("../conexao.php");
 

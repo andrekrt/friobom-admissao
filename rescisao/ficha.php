@@ -6,7 +6,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 require("../conexao.php");
 $tipoUsuario = $_SESSION['tipoUsuario'];
 
-if($tipoUsuario==1){
+if($tipoUsuario==1 || $tipoUsuario ==99){
     $id = filter_input(INPUT_GET, 'id');
     $dataAtual = date("d/m/Y");
 

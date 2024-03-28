@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && $_SESSION['tipoUsuario'] ==2 ){
+if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario'])==false && ($_SESSION['tipoUsuario'] ==2 || $_SESSION['tipoUsuario']==99) ){
 
     $nome = filter_input(INPUT_POST, 'nome' );
     $funcao = filter_input(INPUT_POST, 'funcao');

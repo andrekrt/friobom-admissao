@@ -5,7 +5,7 @@ require("../conexao.php");
 
 $tipoUsuario = $_SESSION['tipoUsuario'];
         
-    if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $_SESSION['tipoUsuario'] == 1 || $_SESSION['tipoUsuario']==2){
+    if(isset($_SESSION['idUsuario']) && empty($_SESSION['idUsuario']) == false && $_SESSION['tipoUsuario'] == 1 || $_SESSION['tipoUsuario']==2 || $_SESSION['tipoUsuario']==99){
 
         $arquivo = 'rescisoes.xls';
 
